@@ -35,7 +35,7 @@ const Toast: React.FC<ToastProps> = ({
 }) => {
   return (
     <motion.div
-      className={`max-w-full text-center items-center min-w-32 ${statusStyles[status]} text-white p-4 flex rounded-lg shadow-lg`}
+      className={`z-50 max-w-full text-center items-center min-w-32 ${statusStyles[status]} text-white p-4 flex rounded-lg shadow-lg`}
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
