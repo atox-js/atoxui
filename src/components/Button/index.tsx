@@ -1,5 +1,5 @@
 import { HTMLMotionProps, motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 
 type Props = HTMLMotionProps<"button"> & {
   children?: React.ReactNode;
@@ -15,6 +15,7 @@ export const Button = React.memo<Props>(function Button(props) {
     rounded = "lg",
     iconOnly,
     className,
+    disabled,
     ...HtmlProps
   } = props;
   const color = (() => {
@@ -32,13 +33,32 @@ export const Button = React.memo<Props>(function Button(props) {
     }
   })();
 
+  const [ripples, setRipples] = useState<
+    { x: number; y: number; size: number; id: number }[]
+  >([]);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const button = event.currentTarget;
+    const rect = button.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    const id = Date.now();
+    setRipples([...ripples, { x, y, size, id }]);
+    setTimeout(() => {
+      setRipples((ripples) => ripples.filter((ripple) => ripple.id !== id));
+    }, 1600);
+  };
+
   return (
     <motion.button
+      animate={{ opacity: disabled ? 0.5 : 1 }}
       transition={{ bounce: 0 }}
-      whileHover={{ scale: 0.95, opacity: 0.8 }}
-      whileTap={{ scale: 0.9 }}
+      whileHover={{ ...(disabled ? undefined : { scale: 0.95, opacity: 0.8 }) }}
+      whileTap={{ ...(disabled ? undefined : { scale: 0.95 }) }}
       className={[
         color,
+        "relative overflow-hidden",
         `w-fit`,
         `min-h-8`,
         `text-sm`,
@@ -52,9 +72,27 @@ export const Button = React.memo<Props>(function Button(props) {
         `${iconOnly ? "px-3 py-2" : "px-4 py-2"}`,
         className,
       ].join(" ")}
+      disabled={disabled}
+      onClick={handleClick}
       {...HtmlProps}
     >
       {children}
+      {ripples.map((ripple) => (
+        <motion.span
+          key={ripple.id}
+          className="absolute rounded-full bg-white opacity-25 pointer-events-none"
+          style={{
+            width: ripple.size,
+            height: ripple.size,
+            left: ripple.x,
+            top: ripple.y,
+            transform: "scale(0)",
+          }}
+          initial={{ scale: 0 }}
+          animate={{ scale: 4, opacity: 0 }}
+          transition={{ duration: 1.5 }}
+        />
+      ))}
     </motion.button>
   );
 });
