@@ -56,7 +56,7 @@ export default React.memo<Props>(function (_props) {
       />
       {hasLabel && (
         <label
-          className={`absolute left-3 top-1/2 transform -translate-y-1/2 text-md duration-300 origin-[0] bg-white px-1 ${
+          className={`absolute left-3 top-1/2 transform -translate-y-1/2 text-md duration-300 origin-[0] bg-inherit px-1 ${
             focused ? variantStyles[variant] : ""
           } ${
             focused || value || placeholder

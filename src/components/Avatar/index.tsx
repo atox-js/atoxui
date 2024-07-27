@@ -7,7 +7,7 @@ type Props = React.HTMLProps<HTMLImageElement> & {
   border?: "none" | "sm" | "md" | "lg";
 };
 
-export const Avatar = React.memo<Props>(function (_props) {
+export default React.memo<Props>(function (_props) {
   var {
     width,
     height,

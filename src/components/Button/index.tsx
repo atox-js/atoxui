@@ -8,7 +8,7 @@ type Props = HTMLMotionProps<"button"> & {
   iconOnly?: boolean;
 };
 
-export const Button = React.memo<Props>(function Button(props) {
+export default React.memo<Props>(function Button(props) {
   const {
     children,
     variant = "default",

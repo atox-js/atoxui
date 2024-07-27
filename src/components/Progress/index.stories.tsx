@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Progress from ".";
-import { Button } from "../Button";
+import Button from "../Button";
 import { useState } from "react";
 
 const meta: Meta<typeof Progress> = {

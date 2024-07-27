@@ -1,5 +1,5 @@
 import { Meta, StoryObj } from "@storybook/react";
-import { Button } from "../Button";
+import Button from "../Button";
 import useToast from ".";
 import ToastContainer from "./ToastContainer";
 
