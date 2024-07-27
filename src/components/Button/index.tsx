@@ -59,7 +59,7 @@ export default React.memo<Props>(function Button(props) {
       className={[
         color,
         "relative overflow-hidden",
-        `w-fit`,
+        `w-fit flex items-center justify-center`,
         `min-h-8`,
         `text-sm`,
         rounded === "sm"
