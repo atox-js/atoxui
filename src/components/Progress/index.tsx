@@ -1,5 +1,6 @@
-import React from "react";
+"use client";
 import { motion } from "framer-motion";
+import React from "react";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   progress: number;
@@ -7,7 +8,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 };
 
 export default React.memo<Props>(function (_props) {
-  const { progress, variant = "default", ...rest } = _props;
+  const { progress, variant = "default", ...props } = _props;
   const color = (() => {
     switch (variant) {
       case "default":
@@ -23,7 +24,10 @@ export default React.memo<Props>(function (_props) {
     }
   })();
   return (
-    <div {...rest} className="w-full overflow-hidden bg-gray-200 rounded-lg h-4">
+    <div
+      {...props}
+      className="w-full overflow-hidden bg-gray-200 rounded-lg h-4"
+    >
       <motion.div
         className={`h-full ${color}`}
         initial={{ width: 0 }}

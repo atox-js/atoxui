@@ -1,3 +1,4 @@
+"use client";
 import { HTMLMotionProps, motion } from "framer-motion";
 import React, { useState } from "react";
 

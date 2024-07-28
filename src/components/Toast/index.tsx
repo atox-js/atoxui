@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { ToastProps, ToastStatus } from "./toast.type";
 

@@ -1,3 +1,4 @@
+"use client";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 import Toast from "./Toast";
